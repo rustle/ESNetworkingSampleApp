@@ -50,6 +50,8 @@
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	__weak TwitterSearchController *weakSelf = self;
 	__weak UINavigationItem *navigationItem = self.navigationItem;
+	// In this contrived example we're scheduling the completion block on a high priority queue;
+	// This doesn't make a lot of sense in this case, but demonstrates that the option is available
 	ESJSONOperation *op = 
 	[ESJSONOperation newJSONOperationWithRequest:request 
 										 success:^(ESJSONOperation *op, id JSON) {
@@ -64,8 +66,10 @@
 												 if (tweet)
 													 [results addObject:tweet];
 											 }
-											 [weakSelf setResults:results];
-											 [[weakSelf tableView] reloadData];
+											 dispatch_async(dispatch_get_main_queue(), ^{
+												 [weakSelf setResults:results];
+												 [[weakSelf tableView] reloadData]; 
+											 });
 										 } failure:^(ESJSONOperation *op) {
 											 navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
 																															   target:weakSelf 
@@ -73,9 +77,12 @@
 											 Tweet *tweet = [Tweet new];
 											 tweet.user = @"Error";
 											 tweet.text = @"Unable to complete search";
-											 [weakSelf setResults:[NSArray arrayWithObject:tweet]];
-											 [[weakSelf tableView] reloadData];
+											 dispatch_async(dispatch_get_main_queue(), ^{
+												 [weakSelf setResults:[NSArray arrayWithObject:tweet]];
+												 [[weakSelf tableView] reloadData]; 
+											 });
 										 }];
+	[op setCompletionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
 	[[SampleNetworkManager sharedManager] addOperation:op];
 }
 
