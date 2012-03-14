@@ -1,9 +1,9 @@
 //
 //  main.m
-//  ESNetworking
+//  ESNetworkingSampleApp
 //
-//  Created by Doug Russell on 9/26/11.
-//  Copyright (c) 2011 Doug Russell. All rights reserved.
+//  Created by Doug Russell on 3/13/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -18,7 +18,7 @@
 @synthesize networkTransferQueue=_networkTransferQueue;
 @synthesize internetReachability=_internetReachability;
 
-+ (id)sharedManager
++ (instancetype)sharedManager
 {
 	static SampleNetworkManager *sharedManager = nil;
 	static dispatch_once_t onceToken;

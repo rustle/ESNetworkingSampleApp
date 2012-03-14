@@ -12,7 +12,7 @@
 
 @interface SampleNetworkManager : NSObject
 
-+ (id)sharedManager;
++ (instancetype)sharedManager;
 - (void)addOperation:(ESHTTPOperation *)op;
 - (BOOL)hasInternets;
 - (void)noConnectionAlert;
