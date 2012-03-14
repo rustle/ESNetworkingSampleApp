@@ -468,6 +468,7 @@
 				GCC_PREFIX_HEADER = "ESNetworkingSampleApp/ESNetworkingSampleApp-Prefix.pch";
 				INFOPLIST_FILE = "ESNetworkingSampleApp/ESNetworkingSampleApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -479,6 +480,7 @@
 				GCC_PREFIX_HEADER = "ESNetworkingSampleApp/ESNetworkingSampleApp-Prefix.pch";
 				INFOPLIST_FILE = "ESNetworkingSampleApp/ESNetworkingSampleApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
