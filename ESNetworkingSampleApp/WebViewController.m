@@ -20,20 +20,36 @@
 #import "WebViewController.h"
 #import "SampleNetworkManager.h"
 
-@interface WebViewController ()
-@property (strong, nonatomic) UIWebView *webView;
+@interface WebViewController () <UIWebViewDelegate>
+@property (nonatomic) UIWebView *webView;
 @end
 
 @implementation WebViewController
-@synthesize webView=_webView;
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+	{
+		self.title = @"Web";
+    }
+    return self;
+}
 
 #pragma mark - View lifecycle
 
 - (void)loadView
 {
-	self.webView = [[UIWebView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-	self.webView.scalesPageToFit = YES;
-	self.view = self.webView;
+	UIWebView *webView = [[UIWebView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+	webView.delegate = self;
+	webView.scalesPageToFit = YES;
+	self.view = webView;
+	self.webView = webView;
+}
+
+- (void)dealloc
+{
+	self.webView.delegate = nil;
 }
 
 - (void)viewDidLoad
@@ -55,7 +71,7 @@
 										  }
 										  else
 										  {
-											  [progressView setProgress:1.0];
+											  [progressView setProgress:0.9];
 											  [webView loadData:op.responseBody 
 													   MIMEType:@"text/html" 
 											   textEncodingName:[NSString localizedNameOfStringEncoding:NSUTF8StringEncoding] 
@@ -63,21 +79,14 @@
 										  }
 									  }];
 	[op setDownloadProgressBlock:^(NSUInteger totalBytesRead, NSUInteger totalBytesExpectedToRead) {
-		[progressView setProgress:((float)totalBytesRead/(float)totalBytesExpectedToRead)];
+		[progressView setProgress:((float)totalBytesRead/(float)totalBytesExpectedToRead) * 0.9];
 	}];
 	[[SampleNetworkManager sharedManager] addOperation:op];
 }
 
-- (void)viewDidUnload
+- (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-	[super viewDidUnload];
-	self.webView = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	((UIProgressView *)self.navigationItem.titleView).progress = 1.0;
 }
 
 @end

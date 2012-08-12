@@ -28,7 +28,7 @@
 @implementation TwitterSearchController
 @synthesize results=_results;
 
-- (id)init
+- (instancetype)init
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) 
@@ -49,15 +49,12 @@
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	__weak TwitterSearchController *weakSelf = self;
-	__weak UINavigationItem *navigationItem = self.navigationItem;
 	// In this contrived example we're scheduling the completion block on a high priority queue;
 	// This doesn't make a lot of sense in this case, but demonstrates that the option is available
 	ESJSONOperation *op = 
 	[ESJSONOperation newJSONOperationWithRequest:request 
 										 success:^(ESJSONOperation *op, id JSON) {
-											 navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
-																															   target:weakSelf 
-																															   action:@selector(refresh:)];
+											 weakSelf.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:weakSelf action:@selector(refresh:)];
 											 // This should really be done off the main thread, but it's fine for this sample
 											 NSMutableArray *results = [NSMutableArray new];
 											 for (NSDictionary *dictionary in [JSON objectForKey:@"results"])
@@ -71,17 +68,16 @@
 												 [[weakSelf tableView] reloadData]; 
 											 });
 										 } failure:^(ESJSONOperation *op) {
-											 navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
-																															   target:weakSelf 
-																															   action:@selector(refresh:)];
+											 weakSelf.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:weakSelf action:@selector(refresh:)];
 											 Tweet *tweet = [Tweet new];
 											 tweet.user = @"Error";
 											 tweet.text = @"Unable to complete search";
 											 dispatch_async(dispatch_get_main_queue(), ^{
 												 [weakSelf setResults:[NSArray arrayWithObject:tweet]];
-												 [[weakSelf tableView] reloadData]; 
+												 [weakSelf.tableView reloadData];
 											 });
 										 }];
+	[op addAcceptableContentType:@"application/json"];
 	[op setCompletionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
 	[[SampleNetworkManager sharedManager] addOperation:op];
 }

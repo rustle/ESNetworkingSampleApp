@@ -42,6 +42,7 @@
 		919418DF15104FD900A9EF0C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 919418C015104FD900A9EF0C /* Reachability.m */; };
 		919418E115104FD900A9EF0C /* UIImage+ESAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 919418C415104FD900A9EF0C /* UIImage+ESAdditions.m */; };
 		919418E31510505200A9EF0C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919418E21510505200A9EF0C /* SystemConfiguration.framework */; };
+		91B3347515D82EA10095792E /* ErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B3347415D82EA10095792E /* ErrorViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +115,8 @@
 		919418C315104FD900A9EF0C /* UIImage+ESAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ESAdditions.h"; sourceTree = "<group>"; };
 		919418C415104FD900A9EF0C /* UIImage+ESAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ESAdditions.m"; sourceTree = "<group>"; };
 		919418E21510505200A9EF0C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		91B3347315D82EA10095792E /* ErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorViewController.h; sourceTree = "<group>"; };
+		91B3347415D82EA10095792E /* ErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +202,8 @@
 				9194187F15104F0100A9EF0C /* TwitterSearchController.m */,
 				9194187815104F0100A9EF0C /* ImageViewController.h */,
 				9194187915104F0100A9EF0C /* ImageViewController.m */,
+				91B3347315D82EA10095792E /* ErrorViewController.h */,
+				91B3347415D82EA10095792E /* ErrorViewController.m */,
 				9194187C15104F0100A9EF0C /* Tweet.h */,
 				9194187D15104F0100A9EF0C /* Tweet.m */,
 			);
@@ -399,6 +404,7 @@
 				919418DD15104FD900A9EF0C /* ESURLPropertyMap.m in Sources */,
 				919418DF15104FD900A9EF0C /* Reachability.m in Sources */,
 				919418E115104FD900A9EF0C /* UIImage+ESAdditions.m in Sources */,
+				91B3347515D82EA10095792E /* ErrorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +428,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -447,7 +452,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

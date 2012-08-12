@@ -22,10 +22,11 @@
 #import "TwitterSearchController.h"
 #import "ImageViewController.h"
 #import "SampleNetworkManager.h"
+#import "ErrorViewController.h"
 
 @implementation DemoViewController
 
-- (id)init
+- (instancetype)init
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) 
@@ -33,13 +34,6 @@
 		self.title = @"Sample Operations";
     }
     return self;
-}
-
-#pragma mark - View lifecycle
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
@@ -51,7 +45,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,6 +66,9 @@
 			break;
 		case 2:
 			cell.textLabel.text = @"Big Image";
+			break;
+		case 3:
+			cell.textLabel.text = @"Timeout";
 			break;
 		default:
 			break;
@@ -97,6 +94,9 @@
 			break;
 		case 2:
 			[self.navigationController pushViewController:[ImageViewController new] animated:YES];
+			break;
+		case 3:
+			[self.navigationController pushViewController:[ErrorViewController new] animated:YES];
 			break;
 		default:
 			break;

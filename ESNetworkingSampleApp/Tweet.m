@@ -20,17 +20,13 @@
 #import "Tweet.h"
 
 @implementation Tweet
-@synthesize user;
-@synthesize text;
 
 + (void)initialize
 {
 	if (self == [Tweet class])
 	{
 		ESObjectMap *map = [Tweet objectMap];
-		
-		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"from_user" 
-															outputKey:@"user"]];
+		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"from_user" outputKey:@"user"]];
 	}
 }
 
