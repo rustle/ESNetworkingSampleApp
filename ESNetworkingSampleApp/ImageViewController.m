@@ -19,7 +19,6 @@
 
 #import "ImageViewController.h"
 #import "SampleNetworkManager.h"
-#import "UIImage+ESAdditions.h"
 
 @interface ImageViewController ()
 @property (weak, nonatomic) UIImageView *imageView;
@@ -58,9 +57,19 @@
 	__weak UIImageView *imageView = self.imageView;
 	ESHTTPOperation *op = 
 	[ESHTTPOperation newHTTPOperationWithRequest:request
-											work:^id<NSObject>(ESHTTPOperation *op, NSError *__autoreleasing *error) {
+											work:^id<NSObject>(ESHTTPOperation *op, NSError **error) {
 												UIImage *image = [UIImage imageWithData:op.responseBody];
-												UIImage *scaledImage = [image scaledToSize:imageView.bounds.size];
+												UIImage *scaledImage;
+												if (image)
+												{
+													// This is a ridiculously dumb scale that doesn't do
+													// anything with aspect ratio or rotation metadata
+													CGSize size = imageView.bounds.size;
+													UIGraphicsBeginImageContextWithOptions(size, YES, [[UIScreen mainScreen] scale]);
+													[image drawInRect:(CGRect){ { 0.0, 0.0 } , size }];
+													scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+													UIGraphicsEndImageContext();
+												}
 												return scaledImage;
 											} 
 									  completion:^(ESHTTPOperation *op) {

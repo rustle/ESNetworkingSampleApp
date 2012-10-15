@@ -1,0 +1,9 @@
+[submodule "ESNetworking"]
+	path = ESNetworking
+	url = https://github.com/rustle/ESNetworking.git
+[submodule "ESObjectMap"]
+	path = ESObjectMap
+	url = https://github.com/rustle/ESObjectMap.git
+[submodule "Reachability"]
+	path = Reachability
+	url = https://github.com/rustle/Reachability
